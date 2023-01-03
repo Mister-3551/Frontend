@@ -41,7 +41,7 @@ export default function Followers() {
                             <Col key={id} xs={12} md={6} lg={4}>
                                 <div className="users-card card">
                                     <div className="users-container">
-                                        <img src={process.env["REACT_APP_PROFILE_PICTURE"] + friend.picture} alt="profile-picture"
+                                        <img src={process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_PROFILE_PICTURE"] + friend.picture} alt="profile-picture"
                                              className="users-image"/>
                                         <div className="users-left">
                                             <h5 className="users-name">{friend.username}</h5>
