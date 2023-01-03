@@ -15,16 +15,19 @@ export default function Chat() {
 
     const [messages, setMessages] = useState([]);
 
+    const [text, setText] = useState("");
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const location = useLocation();
     const { username } = useParams();
 
-    const chatRef = useRef(null)
-    const scroll = () => {
-        chatRef.current.scrollIntoView();
-    }
+    const chatRef = useRef();
+
+    useEffect(() => {
+        chatRef.current?.scrollIntoView({behavior: "smooth"})
+    }, [text])
 
     useEffect(() => {
         if (username !== undefined) {
@@ -54,6 +57,10 @@ export default function Chat() {
             })
     }
 
+    const sendMessage = () => {
+
+    }
+
     return (
         <>
             <Offcanvas show={show} onHide={handleClose}>
@@ -80,17 +87,16 @@ export default function Chat() {
                 </Offcanvas.Body>
             </Offcanvas>
 
-            <div>
+            <div className="chat-panel">
                 <div className="menu">
-                    <Link className="back" onClick={() => {handleShow(); getFriends()}}><img src="https://avatars.githubusercontent.com/u/92102264?s=96&v=4"
-                                                                                                 draggable="false"/></Link>
+                    <Link className="back" onClick={() => {handleShow(); getFriends()}}>
+                        <img src="https://avatars.githubusercontent.com/u/92102264?s=96&v=4" draggable="false"/></Link>
                     <div className="name">{username}
                     </div>
                     <div className="members">Private Chat</div>
                 </div>
 
                 <ol className="chat" ref={chatRef}>
-
                     {messages.map((message, id) =>
                         <div key={id}>
                             {message.idUser.toString() === cookies.get("idUser") ?
@@ -110,12 +116,11 @@ export default function Chat() {
                             }
                         </div>
                     )}
-
                 </ol>
                 <div className="typezone">
                     <form>
-                        <textarea type="text" placeholder="Say something"></textarea>
-                        <input type="button" className="send" value="Send"/>
+                        <textarea type="text" placeholder="Say something" onChange={(event) => setText(event.target.value)}></textarea>
+                        <input type="button" className="send" value="Send" onClick={sendMessage}/>
                     </form>
                 </div>
             </div>
