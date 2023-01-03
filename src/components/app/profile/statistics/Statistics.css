@@ -1,0 +1,119 @@
+.statistics-text-to-center {
+    text-align: center;
+}
+
+.txt-size-level {
+    font-size: 20px;
+}
+
+.txt-size-statistics {
+    font-size: 20px;
+}
+
+.txt-size-rank {
+    font-size: 30px;
+}
+
+.txt-size-username {
+    font-size: 35px;
+}
+
+.text-start {
+    padding: 0 !important;
+}
+
+.text-center {
+    padding: 0 !important;
+}
+
+.text-end {
+    padding: 0 !important;
+}
+
+.circle {
+    max-width: 150px;
+}
+
+.c1 {
+    padding-top: 50px;
+}
+
+.row-border {
+    border-style: solid;
+}
+
+.statistics-form {
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.statistics-container {
+    display: flex;
+    align-items: center;
+    margin: 20px 0px;
+}
+
+.statistics-left {
+    width: 80%;
+}
+
+.statistics-image {
+    min-width: 90px;
+    min-height: 90px;
+    max-width: 90px;
+    max-height: 90px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 2px solid #5957f9;
+}
+
+.statistics-name {
+    font-size: 30px;
+    font-weight: bold;
+    color: #272727;
+    position: relative;
+    top: 8px;
+}
+.statistics-rank {
+    font-size: 20px;
+    color: grey;
+    position: relative;
+    top: 2px;
+}
+
+.statistics-levels-completed {
+    font-size: 20px;
+    color: gray;
+    margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .txt-size-level {
+        font-size: 15px;
+    }
+
+    .txt-size-statistics {
+        font-size: 15px;
+    }
+
+    .txt-size-rank {
+        font-size: 25px;
+    }
+
+    .txt-size-username {
+        font-size: 30px;
+    }
+
+    .circle {
+        max-width: 120px;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .statistics-col {
+        text-align: center;
+    }
+}

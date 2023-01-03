@@ -1,0 +1,48 @@
+.users-container {
+    display: flex;
+}
+
+.users-card {
+    background-color: #fff;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /*margin: 5px 25px;*/
+    margin: 5px 19px 5px 5px;
+    padding: 5px 25px 5px 5px;
+}
+
+.users-left {
+    width: 70%;
+}
+
+.users-right {
+    width: 30%;
+    text-align: right;
+    transform: translate(0, +35%);
+}
+
+.users-image {
+    min-width: 70px;
+    min-height: 70px;
+    max-width: 70px;
+    max-height: 70px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 2px solid #5957f9;
+}
+
+.users-name {
+    font-size: 15px;
+    font-weight: bold;
+    color: #272727;
+    position: relative;
+    top: 8px;
+}
+
+.users-rank {
+    margin: 0;
+    font-size: 14px;
+    color: grey;
+    position: relative;
+    top: 2px;
+}
