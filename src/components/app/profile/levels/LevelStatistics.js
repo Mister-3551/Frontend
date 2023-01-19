@@ -54,7 +54,7 @@ export default function LevelStatistics() {
                                         <img src="https://avatars.githubusercontent.com/u/92102264?s=96&v=4"
                                              className="img-fluid level-image"/>
                                         <div className="levels-statistics-left">
-                                            <p className="levels-statistics-data">Score: {level.currentScore}</p>
+                                            <p className="levels-statistics-data">Score: {level.score}</p>
                                             <p className="levels-statistics-data">Used time: {level.usedTime}</p>
                                             <p className="levels-statistics-data">Played on: {level.createdAt}</p>
                                         </div>
