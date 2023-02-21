@@ -1,11 +1,9 @@
 import React, {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import Cookies from "universal-cookie";
-import {Col, Row, Table} from "react-bootstrap";
 import "./index.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Footer from "../Footer/Footer";
 
 export default function Index() {
 
@@ -98,16 +96,14 @@ export default function Index() {
             <section id="download" className="why-us section-bg">
                 <div className="container" data-aos="fade-up">
 
-                    <div className="row gy-4">
+                    <div className="row">
 
                         <div className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                             <div className="why-box">
-                                <h3>Download <br/> "GAME NAME"</h3>
+                                <h3>Download</h3>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                     incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                                    Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel
-                                    necessitatibus optio ad corporis.
                                 </p>
                                 <div className="text-center">
                                     <a href="#" className="more-btn">Learn More <i className="bx bx-chevron-right"></i></a>
@@ -116,7 +112,7 @@ export default function Index() {
                         </div>
 
                         <div className="col-lg-8 d-flex align-items-center">
-                            <div className="row gy-4">
+                            <div className="row">
 
                                 <div className="col-xl-4" data-aos="fade-up" data-aos-delay="200">
                                     <div

@@ -213,6 +213,7 @@ section:first-child {
     padding: 30px;
     background: var(--color-primary);
     color: #fff;
+    height: 353px;
 }
 
 .why-us .why-box h3 {
@@ -771,4 +772,9 @@ textarea {
 
 .footer .credits a {
     color: #fff;
+}
+
+/*other*/
+.top0 {
+    margin-top: 0px !important;
 }

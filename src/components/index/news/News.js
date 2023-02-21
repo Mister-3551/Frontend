@@ -3,12 +3,43 @@ import {useNavigate} from "react-router-dom";
 import Cookies from "universal-cookie";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import axios from "axios";
+import {useState} from "react";
 
 export default function News() {
 
     const navigate = useNavigate();
     const cookies = new Cookies();
     const checkCookie = cookies.get("sessionToken");
+
+    const [news, setNews] = useState(
+        [
+
+            {
+                "title": "Skin",
+                "text": "bla bla bla"
+            },
+            {
+                "title": "Mission",
+                "text": "bla bla bla"
+            },
+            {
+                "title": "Shop",
+                "text": "bla bla bla"
+            },
+            {
+                "title": "Shop",
+                "text": "bla bla bla"
+            },
+            {
+                "title": "Shop",
+                "text": "bla bla bla"
+            },
+            {
+                "title": "Shop",
+                "text": "bla bla bla"
+            }
+        ]);
 
     useEffect(() => {
         if (checkCookie) {
@@ -17,6 +48,16 @@ export default function News() {
 
         AOS.init({});
         window.scrollTo(0, 0);
+
+        axios({
+            method: "post",
+            url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_SIGN_IN"],
+            params: {},
+        })
+            .then(response => response.data)
+            .then((data) => {
+                //setNews(data);
+            })
     });
 
     return (
@@ -27,9 +68,6 @@ export default function News() {
                         <div className="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
                             <h2 data-aos="fade-up">Game news</h2>
                             <p data-aos="fade-up" data-aos-delay="100">Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
-                            <div className="d-flex" data-aos="fade-up" data-aos-delay="200">
-                                <a href="#download" className="btn-book-a-table">Download</a>
-                            </div>
                         </div>
                         <div className="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
                             <img src="https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="img-fluid" alt=""/>
@@ -42,69 +80,22 @@ export default function News() {
                 <div className="container" data-aos="fade-up">
 
                     <div className="row gy-4">
-
-                        <div className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                            <div className="why-box">
-                                <h3>Download <br/> "GAME NAME"</h3>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                                    Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel
-                                    necessitatibus optio ad corporis.
-                                </p>
-                                <div className="text-center">
-                                    <a href="#" className="more-btn">Learn More <i className="bx bx-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-8 d-flex align-items-center">
-                            <div className="row gy-4">
-
-                                <div className="col-xl-4" data-aos="fade-up" data-aos-delay="200">
-                                    <div
-                                        className="icon-box d-flex flex-column justify-content-center align-items-center">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/71/71753.png" alt="" className="us-image"/>
-                                        <h4>Windows</h4>
-                                        <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut
-                                            aliquip</p>
-                                        <div className="text-center">
-                                            <a href="#" className="more-btn">Download</a>
-                                        </div>
+                        {
+                            news.map((new1, id) =>
+                                <div className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                                    <div className="why-box">
+                                        <h3>{new1.title}</h3>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                                            Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel
+                                            necessitatibus optio ad corporis.
+                                        </p>
                                     </div>
                                 </div>
-
-                                <div className="col-xl-4" data-aos="fade-up" data-aos-delay="300">
-                                    <div
-                                        className="icon-box d-flex flex-column justify-content-center align-items-center">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/25/25719.png" alt="" className="us-image"/>
-                                        <h4>Linux</h4>
-                                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                            deserunt</p>
-                                        <div className="text-center">
-                                            <a href="#" className="more-btn">Download</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-4" data-aos="fade-up" data-aos-delay="400">
-                                    <div
-                                        className="icon-box d-flex flex-column justify-content-center align-items-center">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/61/61120.png" alt="" className="us-image"/>
-                                        <h4>Android</h4>
-                                        <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis
-                                            facere</p>
-                                        <div className="text-center">
-                                            <a href="#" className="more-btn">Download</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
+                            )
+                        }
                     </div>
-
                 </div>
             </section>
 
