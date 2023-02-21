@@ -112,7 +112,7 @@ export default function Index() {
                         </div>
 
                         <div className="col-lg-8 d-flex align-items-center">
-                            <div className="row">
+                            <div className="row gy-4">
 
                                 <div className="col-xl-4" data-aos="fade-up" data-aos-delay="200">
                                     <div
