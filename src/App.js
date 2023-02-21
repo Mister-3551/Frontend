@@ -24,6 +24,8 @@ import NormalRoute from "./components/other/NormalRoute";
 import AdminNavigation from "./components/app/admin/navigation/AdminNavigation";
 import Account from "./components/app/admin/account/Account";
 import Cookies from "universal-cookie";
+import {useEffect} from "react";
+import AOS from "aos";
 
 export default function App() {
 
@@ -75,7 +77,6 @@ export default function App() {
             </Routes>
           </Row>
         </Container>
-        <Footer/>
       </BrowserRouter>
   );
 }

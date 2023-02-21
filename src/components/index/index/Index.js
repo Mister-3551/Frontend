@@ -3,6 +3,9 @@ import {useNavigate} from "react-router-dom";
 import Cookies from "universal-cookie";
 import {Col, Row, Table} from "react-bootstrap";
 import "./index.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Footer from "../Footer/Footer";
 
 export default function Index() {
 
@@ -14,23 +17,25 @@ export default function Index() {
         if (checkCookie) {
             navigate("/profile");
         }
+
+        AOS.init({});
+        window.scrollTo(0, 0);
     }, []);
 
     return (
         <div>
             <section id="hero" className="hero d-flex align-items-center section-bg">
-                <div className="container">
+                <div className="container" data-aos="fade-up">
                     <div className="row justify-content-between gy-5">
                         <div className="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-                            <h2 data-aos="fade-up">Enjoy Your Healthy<br/>Delicious Food</h2>
+                            <h2 data-aos="fade-up">Download game<br/>for free</h2>
                             <p data-aos="fade-up" data-aos-delay="100">Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
                             <div className="d-flex" data-aos="fade-up" data-aos-delay="200">
-                                <a href="#book-a-table" className="btn-book-a-table">Book a Table</a>
-                                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" className="glightbox btn-watch-video d-flex align-items-center"><i className="bi bi-play-circle"></i><span>Watch Video</span></a>
+                                <a href="#download" className="btn-book-a-table">Download</a>
                             </div>
                         </div>
                         <div className="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-                            <img src="assets/img/hero-img.png" className="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300"/>
+                            <img src="https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="img-fluid" alt=""/>
                         </div>
                     </div>
                 </div>
@@ -80,7 +85,7 @@ export default function Index() {
                                 </p>
 
                                 <div className="position-relative mt-4">
-                                    <img src="assets/img/about-2.jpg" className="img-fluid" alt=""/>
+                                    <img src="https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="img-fluid" alt=""/>
                                         <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
                                            className="glightbox play-btn"></a>
                                 </div>
@@ -90,14 +95,14 @@ export default function Index() {
                 </div>
             </section>
 
-            <section id="why-us" className="why-us section-bg">
+            <section id="download" className="why-us section-bg">
                 <div className="container" data-aos="fade-up">
 
                     <div className="row gy-4">
 
                         <div className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                             <div className="why-box">
-                                <h3>Why Choose Yummy?</h3>
+                                <h3>Download <br/> "GAME NAME"</h3>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                     incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
@@ -116,30 +121,39 @@ export default function Index() {
                                 <div className="col-xl-4" data-aos="fade-up" data-aos-delay="200">
                                     <div
                                         className="icon-box d-flex flex-column justify-content-center align-items-center">
-                                        <i className="bi bi-clipboard-data"></i>
-                                        <h4>Corporis voluptates officia eiusmod</h4>
+                                        <img src="https://cdn-icons-png.flaticon.com/512/71/71753.png" alt="" className="us-image"/>
+                                        <h4>Windows</h4>
                                         <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut
                                             aliquip</p>
+                                        <div className="text-center">
+                                            <a href="#" className="more-btn">Download</a>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div className="col-xl-4" data-aos="fade-up" data-aos-delay="300">
                                     <div
                                         className="icon-box d-flex flex-column justify-content-center align-items-center">
-                                        <i className="bi bi-gem"></i>
-                                        <h4>Ullamco laboris ladore pan</h4>
+                                        <img src="https://cdn-icons-png.flaticon.com/512/25/25719.png" alt="" className="us-image"/>
+                                        <h4>Linux</h4>
                                         <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
                                             deserunt</p>
+                                        <div className="text-center">
+                                            <a href="#" className="more-btn">Download</a>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div className="col-xl-4" data-aos="fade-up" data-aos-delay="400">
                                     <div
                                         className="icon-box d-flex flex-column justify-content-center align-items-center">
-                                        <i className="bi bi-inboxes"></i>
-                                        <h4>Labore consequatur incidid dolore</h4>
+                                        <img src="https://cdn-icons-png.flaticon.com/512/61/61120.png" alt="" className="us-image"/>
+                                        <h4>Android</h4>
                                         <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis
                                             facere</p>
+                                        <div className="text-center">
+                                            <a href="#" className="more-btn">Download</a>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -151,12 +165,12 @@ export default function Index() {
                 </div>
             </section>
 
-            <section id="chefs" className="chefs section-bg">
+            <section id="github" className="chefs section-bg">
                 <div className="container" data-aos="fade-up">
 
                     <div className="section-header">
-                        <h2>Chefs</h2>
-                        <p>Our <span>Proffesional</span> Chefs</p>
+                        <h2>GitHub</h2>
+                        <p>Open source code</p>
                     </div>
 
                     <div className="row gy-4">
@@ -165,19 +179,14 @@ export default function Index() {
                              data-aos-delay="100">
                             <div className="chef-member">
                                 <div className="member-img">
-                                    <img src="assets/img/chefs/chefs-1.jpg" className="img-fluid" alt=""/>
-                                        <div className="social">
-                                            <a href=""><i className="bi bi-twitter"></i></a>
-                                            <a href=""><i className="bi bi-facebook"></i></a>
-                                            <a href=""><i className="bi bi-instagram"></i></a>
-                                            <a href=""><i className="bi bi-linkedin"></i></a>
-                                        </div>
+                                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" className="img-fluid download-image" alt=""/>
                                 </div>
                                 <div className="member-info">
-                                    <h4>Walter White</h4>
+                                    <h4>Game</h4>
                                     <span>Master Chef</span>
                                     <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae
                                         aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
+                                    <a href="https://github.com/Mister-3551/Sample" target="_blank"><button type="button">View Code</button></a>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +195,7 @@ export default function Index() {
                              data-aos-delay="200">
                             <div className="chef-member">
                                 <div className="member-img">
-                                    <img src="assets/img/chefs/chefs-2.jpg" className="img-fluid" alt=""/>
+                                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" className="img-fluid download-image" alt=""/>
                                         <div className="social">
                                             <a href=""><i className="bi bi-twitter"></i></a>
                                             <a href=""><i className="bi bi-facebook"></i></a>
@@ -195,10 +204,11 @@ export default function Index() {
                                         </div>
                                 </div>
                                 <div className="member-info">
-                                    <h4>Sarah Jhonson</h4>
+                                    <h4>Website</h4>
                                     <span>Patissier</span>
                                     <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima
                                         suscipit corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
+                                    <a href="https://github.com/Mister-3551/Frontend" target="_blank"><button type="button">View Code</button></a>
                                 </div>
                             </div>
                         </div>
@@ -207,19 +217,14 @@ export default function Index() {
                              data-aos-delay="300">
                             <div className="chef-member">
                                 <div className="member-img">
-                                    <img src="assets/img/chefs/chefs-3.jpg" className="img-fluid" alt=""/>
-                                        <div className="social">
-                                            <a href=""><i className="bi bi-twitter"></i></a>
-                                            <a href=""><i className="bi bi-facebook"></i></a>
-                                            <a href=""><i className="bi bi-instagram"></i></a>
-                                            <a href=""><i className="bi bi-linkedin"></i></a>
-                                        </div>
+                                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" className="img-fluid download-image" alt=""/>
                                 </div>
                                 <div className="member-info">
-                                    <h4>William Anderson</h4>
+                                    <h4>Backend</h4>
                                     <span>Cook</span>
                                     <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt.
                                         Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
+                                    <a href="https://github.com/Mister-3551/Backend" target="_blank"><button type="button">View Code</button></a>
                                 </div>
                             </div>
                         </div>
@@ -244,7 +249,7 @@ export default function Index() {
                             referrerPolicy="no-referrer-when-downgrade" className="google-maps"></iframe>
                     </div>
 
-                    <div className="row gy-4">
+                    <div className="row gy-4" data-aos="fade-up">
 
                         <div className="col-md-6">
                             <div className="info-item  d-flex align-items-center">
@@ -290,18 +295,19 @@ export default function Index() {
 
                     </div>
 
-                    <form action="forms/contact.php" method="post" role="form" className="php-email-form p-3 p-md-4">
+                    <form action="forms/contact.php" method="post" role="form" className="php-email-form p-3 p-md-4" data-aos="fade-up"
+                          data-aos-anchor-placement="top-bottom">
                         <div className="form-group">
                             <input type="text" name="name" className="form-control" id="name"
-                                   placeholder="Your Name" required/>
+                                   placeholder="Your Name"/>
                         </div>
                         <div className="form-group">
                             <input type="email" className="form-control" name="email" id="email"
-                                   placeholder="Your Email" required/>
+                                   placeholder="Your Email"/>
                         </div>
                         <div className="form-group">
                             <input type="text" className="form-control" name="subject" id="subject"
-                                   placeholder="Subject" required/>
+                                   placeholder="Subject"/>
                         </div>
                         <div className="form-group">
                             <textarea className="form-control" name="message" rows="5" placeholder="Message"
@@ -319,7 +325,7 @@ export default function Index() {
                 </div>
             </section>
 
-            <footer id="footer" className="footer">
+            <footer id="footer" className="footer container-fluid">
 
                 <div className="container">
                     <div className="row gy-3">
@@ -366,7 +372,6 @@ export default function Index() {
                                 <a href="#" className="linkedin"><i className="bi bi-linkedin"></i></a>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -379,7 +384,6 @@ export default function Index() {
                     </div>
                 </div>
             </footer>
-
         </div>
     )
 };

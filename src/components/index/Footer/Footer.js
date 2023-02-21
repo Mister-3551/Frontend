@@ -5,7 +5,7 @@ export default function Footer() {
     let fullYear = new Date().getFullYear();
 
     return (
-        /*<Navbar fixed="bottom" bg="lights" variant="dark">
+        <Navbar fixed="bottom" bg="lights" variant="dark">
             <Container>
                 <Col className="text-center text-muted">
                     <div>
@@ -13,7 +13,6 @@ export default function Footer() {
                     </div>
                 </Col>
             </Container>
-        </Navbar>*/
-        null
+        </Navbar>
     );
 }

@@ -54,7 +54,54 @@ export default function SignIn () {
     }
 
     return (
-        <>
+        <div>
+
+            <section id="hero" className="hero d-flex align-items-center section-bg">
+                <div className="container" data-aos="fade-up">
+                    <div className="row justify-content-between gy-5">
+                        <div className="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+                            <h2 data-aos="fade-up">Download game<br/>for free</h2>
+                            <p data-aos="fade-up" data-aos-delay="100">Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+                            <div className="d-flex" data-aos="fade-up" data-aos-delay="200">
+                                <a href="#download" className="btn-book-a-table">Download</a>
+                            </div>
+                        </div>
+                        <div className="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+                            <form action="forms/contact.php" method="post" role="form" className="php-email-form p-3 p-md-4" data-aos="fade-up"
+                                  data-aos-anchor-placement="top-bottom">
+                                <div className="form-group">
+                                    <input type="text" name="name" className="form-control" id="name"
+                                           placeholder="Your Name"/>
+                                </div>
+                                <div className="form-group">
+                                    <input type="email" className="form-control" name="email" id="email"
+                                           placeholder="Your Email"/>
+                                </div>
+                                <div className="form-group">
+                                    <input type="text" className="form-control" name="subject" id="subject"
+                                           placeholder="Subject"/>
+                                </div>
+                                <div className="form-group">
+                            <textarea className="form-control" name="message" rows="5" placeholder="Message"
+                                      required/>
+                                </div>
+                                <div className="my-3">
+                                    <div className="loading">Loading</div>
+                                    <div className="error-message"></div>
+                                    <div className="sent-message">Your message has been sent. Thank you!</div>
+                                </div>
+                                <div className="text-center">
+                                    <button type="submit">Send Message</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    )
+
+    /* <>
             {!checkId || !checkUser ?
                 <div className="form-container">
                     <form className="form" onSubmit={signIn}>
@@ -93,6 +140,5 @@ export default function SignIn () {
                 <h3>Wrong inputs</h3>
                 <p>Wrong email/username or password</p>
             </Popup>
-        </>
-    );
+        </>*/
 };
