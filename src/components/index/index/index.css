@@ -286,6 +286,15 @@ section:first-child {
     }
 }
 
+.us-image {
+    width: 50px;
+    height: 50px;
+}
+
+/*--------------------------------------------------------------
+# Events Section
+--------------------------------------------------------------*/
+
 .events .container-fluid {
     padding: 0;
 }
@@ -308,6 +317,10 @@ section:first-child {
     background: rgba(0, 0, 0, 0.6);
     position: absolute;
     inset: 0;
+}
+
+.events img {
+    max-height: 250px;
 }
 
 .events .event-item h3 {
@@ -355,11 +368,6 @@ section:first-child {
 
 .events .swiper-pagination .swiper-pagination-bullet-active {
     background-color: var(--color-primary);
-}
-
-.us-image {
-    width: 50px;
-    height: 50px;
 }
 
 /*--------------------------------------------------------------

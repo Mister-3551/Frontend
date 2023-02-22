@@ -15,23 +15,25 @@ export default function News() {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
-        if (checkCookie) {
-            navigate("/profile");
-        }
+            if (checkCookie) {
+                navigate("/profile");
+            }
 
-        AOS.init({});
-        window.scrollTo(0, 0);
+            AOS.init({});
+            window.scrollTo(0, 0);
 
-        axios({
-            method: "post",
-            url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_NEWS"],
-            params: {},
-        })
-            .then(response => response.data)
-            .then((data) => {
-                setNews(data);
+            axios({
+                method: "post",
+                url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_NEWS"],
+                params: {},
             })
-    }, []);
+                .then(response => response.data)
+                .then((data) => {
+                    setNews(data);
+                }).catch(error => {
+                alert(error);
+            });
+        }, []);
 
     return (
         <div>

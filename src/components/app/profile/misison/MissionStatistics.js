@@ -4,17 +4,20 @@ import "./LevelStatistics.css";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import {Link, useParams} from "react-router-dom";
+import AOS from "aos";
 
-export default function LevelStatistics() {
+export default function MissionStatistics() {
 
     const cookies = new Cookies();
-    const [levelsData, setLevelsData] = useState([]);
+    const [missionData, setMissionData] = useState([]);
     const [levelName, setLevelName] = useState("");
 
     const { username } = useParams();
     const { mapName } = useParams();
 
     useEffect(() => {
+        AOS.init({});
+
         const idUserOrUsername = username === undefined || username === null ? cookies.get("idUser") : username;
 
         axios({
@@ -24,7 +27,7 @@ export default function LevelStatistics() {
         })
             .then(response => response.data)
             .then((data) => {
-                setLevelsData(data);
+                setMissionData(data);
                 axios({
                     method: "post",
                     url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_LEVEL_NAME_STATISTICS"],
@@ -42,7 +45,30 @@ export default function LevelStatistics() {
     }, []);
 
     return (
-        <h1>Level</h1>,
+        <div>
+            <section id="github" className="chefs section-bg">
+                <div className="container" data-aos="fade-up">
+                    <div className="row gy-4" data-aos="fade-up">
+                        {
+                            missionData.map((mission, id) =>
+                                <div key={id} className="col-md-4" data-aos="fade-up">
+                                    <div className="info-item  d-flex align-items-center">
+                                        <div>
+                                            <h3>Level Name</h3>
+                                            <p>A108 Adam Street, New York, NY 535022</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+            </section>
+        </div>
+    );
+
+    /*
+    h1>Level</h1>
             <div>
                 <h2 className="text-center">{levelName}</h2>
                 <Row>
@@ -64,5 +90,5 @@ export default function LevelStatistics() {
                         )}
                 </Row>
             </div>
-    );
+     */
 }

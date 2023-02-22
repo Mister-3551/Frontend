@@ -15,7 +15,7 @@ import {useAuth} from "./components/other/AuthProvider";
 import Search from "./components/app/search/Search";
 import PrivateProfile from "./components/app/profile/PrivateProfile";
 import PublicProfile from "./components/app/profile/PublicProfile";
-import LevelStatistics from "./components/app/profile/levels/LevelStatistics";
+import MissionStatistics from "./components/app/profile/misison/MissionStatistics";
 import Chat from "./components/app/messenger/Chat";
 import Users from "./components/app/users/Users";
 import Admin from "./components/app/admin/Admin";
@@ -57,8 +57,8 @@ export default function App() {
               <Route exact path={"/profile"} element={<PrivateRoute><PrivateProfile/></PrivateRoute>}/>
               <Route exact path={"/:username"} element={<PrivateRoute><PublicProfile/></PrivateRoute>}/>
 
-              <Route exact path={"level/:mapName"} element={<PrivateRoute><LevelStatistics/></PrivateRoute>}/>
-              <Route exact path={":username/level/:mapName"} element={<PrivateRoute><LevelStatistics/></PrivateRoute>}/>
+              <Route exact path={"level/:mapName"} element={<PrivateRoute><MissionStatistics/></PrivateRoute>}/>
+              <Route exact path={":username/level/:mapName"} element={<PrivateRoute><MissionStatistics/></PrivateRoute>}/>
 
               <Route exact path={"/search/"} element={<PrivateRoute><Search/></PrivateRoute>}/>
               <Route exact path={"/search/:username"} element={<PrivateRoute><Search/></PrivateRoute>}/>

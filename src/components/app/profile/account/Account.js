@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import "./Account.css";
 import {useUpdate} from "../../../other/GlobalVariables";
 import AOS from "aos";
 import {allowedCharacters} from "../../../other/Regex";

@@ -1,7 +1,7 @@
 import React from "react";
 import {Tab, Tabs} from "react-bootstrap";
 import Statistics from "./statistics/Statistics";
-import Levels from "./levels/Levels";
+import Missions from "./misison/Missions";
 
 export default function PublicProfile() {
     return (
@@ -10,7 +10,7 @@ export default function PublicProfile() {
                 <Statistics/>
             </Tab>
             <Tab eventKey="levelStatistics" title="Level Statistics">
-                <Levels/>
+                <Missions/>
             </Tab>
         </Tabs>
     );
