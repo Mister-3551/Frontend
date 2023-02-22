@@ -12,34 +12,7 @@ export default function News() {
     const cookies = new Cookies();
     const checkCookie = cookies.get("sessionToken");
 
-    const [news, setNews] = useState(
-        [
-
-            {
-                "title": "Skin",
-                "text": "bla bla bla"
-            },
-            {
-                "title": "Mission",
-                "text": "bla bla bla"
-            },
-            {
-                "title": "Shop",
-                "text": "bla bla bla"
-            },
-            {
-                "title": "Shop",
-                "text": "bla bla bla"
-            },
-            {
-                "title": "Shop",
-                "text": "bla bla bla"
-            },
-            {
-                "title": "Shop",
-                "text": "bla bla bla"
-            }
-        ]);
+    const [news, setNews] = useState([]);
 
     useEffect(() => {
         if (checkCookie) {
@@ -51,14 +24,14 @@ export default function News() {
 
         axios({
             method: "post",
-            url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_SIGN_IN"],
+            url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_NEWS"],
             params: {},
         })
             .then(response => response.data)
             .then((data) => {
-                //setNews(data);
+                setNews(data);
             })
-    });
+    }, []);
 
     return (
         <div>
@@ -81,16 +54,11 @@ export default function News() {
 
                     <div className="row gy-4">
                         {
-                            news.map((new1, id) =>
-                                <div className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                            news.map((news, id) =>
+                                <div key={id} className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                                     <div className="why-box">
-                                        <h3>{new1.title}</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                                            Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel
-                                            necessitatibus optio ad corporis.
-                                        </p>
+                                        <h3>{news.title}</h3>
+                                        <p>{news.text}</p>
                                     </div>
                                 </div>
                             )

@@ -1,12 +1,8 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import "./Form.css";
-import {Link} from "react-router-dom";
-import {Button} from "react-bootstrap";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import {useAuth} from "../../other/AuthProvider";
-import Popup from "../../other/Pupop";
 import jwt from 'jwt-decode';
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -17,15 +13,9 @@ export default function SignIn () {
     const [emailUsername, setEmailUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const [emptyFields, setEmptyFields] = useState(false);
-    const [wrongInputs, setWrongInputs] = useState(false);
-
     const cookies = new Cookies();
     const {setAuth}  = useAuth();
     const navigate = useNavigate();
-
-    const checkId = cookies.get("idUser");
-    const checkUser = cookies.get("role");
 
     const checkCookie = cookies.get("idUser");
 

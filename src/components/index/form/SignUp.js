@@ -1,16 +1,13 @@
 import React from "react";
-import "./Form.css";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import Popup from "../../other/Pupop";
-import {Button} from "react-bootstrap";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import "aos/dist/aos.css";
 import {useEffect} from "react";
 import AOS from "aos";
-import elements from "aos/src/js/helpers/elements";
 import button from "bootstrap/js/src/button";
+import {allowedCharacters, allowedCharactersForPassword, emailRegex} from "../../other/Regex";
 
 export default function SignUp() {
     const cookies = new Cookies();
@@ -22,16 +19,6 @@ export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const [emptyFields, setEmptyFields] = useState(false);
-    const [wrongUsername, setWrongUsername] = useState(false);
-    const [wrongPassword, setWrongPassword] = useState(false);
-    const [usernameExists, setUsernameExists] = useState(false);
-    const [emailExists, setEmailExists] = useState(false);
-    const [dataResponse, setDataResponse] = useState(false);
-    const [usernameIncludes, setUsernameIncludes] = useState(false);
-    const [successfully, setSuccessfully] = useState(false);
-    const [openPopup, setOpenPopup] = useState(false);
-
     useEffect(() => {
 
         if (checkCookie) {
@@ -41,10 +28,6 @@ export default function SignUp() {
         AOS.init({});
         window.scrollTo(0, 0);
     }, []);
-
-    const specialCharacters = [".", ",", "(", ")", "!", "#", "'", "%"];
-    const allowedCharacters = /^[A-Za-z0-9]*$/;
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     const signUp = (event) => {
         event.preventDefault();
@@ -75,15 +58,20 @@ export default function SignUp() {
             return;
         }
 
+        if (!allowedCharacters.test(password)) {
+            errorLabel.textContent = "Illegal characters in password";
+            return;
+        }
+
         axios.post("http://localhost:8080/signup/fullname/" + fullName + "/username/" + username + "/email/" + email + "/password/" + password)
             .then(response => response.data)
             .then((data) => {
                 if (data === "username") {
                     errorLabel.textContent = "Username already exists";
-                } else setUsernameExists(false);
+                }
                 if (data === "email") {
                     errorLabel.textContent = "Email already exists";
-                } else setEmailExists(false);
+                }
                 if (data === "successfully") {
                     errorLabel.textContent = "Successfully";
                 }

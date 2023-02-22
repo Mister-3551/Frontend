@@ -516,6 +516,10 @@ section:first-child {
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
 }
 
+.contact .max-w {
+    max-width: 500px;
+}
+
 .contact .php-email-form .form-group {
     padding-bottom: 20px;
 }

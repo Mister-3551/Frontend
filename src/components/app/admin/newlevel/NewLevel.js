@@ -26,7 +26,7 @@ export default function NewLevel() {
 
         axios({
             method: "post",
-            url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_ADD_NEW_LEVEL"],
+            url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_ADD_NEW_MISSION"],
             data : {
                 idAdmin: cookies.get("idUser"),
                 levelName: levelName,
