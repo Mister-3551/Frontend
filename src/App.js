@@ -15,7 +15,6 @@ import {useAuth} from "./components/other/AuthProvider";
 import Search from "./components/app/search/Search";
 import PrivateProfile from "./components/app/profile/PrivateProfile";
 import PublicProfile from "./components/app/profile/PublicProfile";
-import MissionStatistics from "./components/app/profile/misison/MissionStatistics";
 import Chat from "./components/app/messenger/Chat";
 import Users from "./components/app/users/Users";
 import Admin from "./components/app/admin/Admin";
@@ -24,8 +23,6 @@ import NormalRoute from "./components/other/NormalRoute";
 import AdminNavigation from "./components/app/admin/navigation/AdminNavigation";
 import Account from "./components/app/admin/account/Account";
 import Cookies from "universal-cookie";
-import {useEffect} from "react";
-import AOS from "aos";
 
 export default function App() {
 
@@ -56,9 +53,6 @@ export default function App() {
 
               <Route exact path={"/profile"} element={<PrivateRoute><PrivateProfile/></PrivateRoute>}/>
               <Route exact path={"/:username"} element={<PrivateRoute><PublicProfile/></PrivateRoute>}/>
-
-              <Route exact path={"level/:mapName"} element={<PrivateRoute><MissionStatistics/></PrivateRoute>}/>
-              <Route exact path={":username/level/:mapName"} element={<PrivateRoute><MissionStatistics/></PrivateRoute>}/>
 
               <Route exact path={"/search/"} element={<PrivateRoute><Search/></PrivateRoute>}/>
               <Route exact path={"/search/:username"} element={<PrivateRoute><Search/></PrivateRoute>}/>
