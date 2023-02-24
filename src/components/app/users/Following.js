@@ -17,7 +17,7 @@ export default function Following() {
 
     useEffect(() => {
         axios({
-            method: 'post',
+            method: "post",
             url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_FOLLOWING"],
             params: {idUserOrUsername : idUserOrUsername}
         })
@@ -38,15 +38,15 @@ export default function Following() {
                     {
                         following.map((friend, id) =>
                             <Col key={id} xs={12} md={6} lg={4}>
-                                <div className="users-card card">
-                                    <div className="users-container">
+                                <div className="user-card card">
+                                    <div className="user-container">
                                         <img src={process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_PROFILE_PICTURE"] + friend.picture} alt="profile-picture"
-                                             className="users-image"/>
-                                        <div className="users-left">
-                                            <h5 className="users-name">{friend.username}</h5>
-                                            <p className="users-rank">Rank: {friend.rank}</p>
+                                             className="user-image"/>
+                                        <div className="user-left">
+                                            <h5 className="user-name">{friend.username}</h5>
+                                            <p className="user-rank">Rank: {friend.rank}</p>
                                         </div>
-                                        <div className="users-right">
+                                        <div className="user-right">
                                             {currentUser !== friend.id.toString() ?
                                                 <Link to={"../" + friend.username.toLowerCase()}
                                                       className="btn-link">View</Link> :

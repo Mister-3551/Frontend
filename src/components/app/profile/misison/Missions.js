@@ -2,12 +2,8 @@ import React, {useEffect, useState} from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import {Link, useParams} from "react-router-dom";
-import 'swiper/css';
-import 'swiper/css/bundle';
-import 'swiper/swiper-bundle.min.css';
 import AOS from "aos";
 import {Button, Modal} from "react-bootstrap";
-import data from "bootstrap/js/src/dom/data";
 
 export default function Missions() {
 
