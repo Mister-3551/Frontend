@@ -1,7 +1,6 @@
 import "./App.css";
 import {Container, Row} from "react-bootstrap";
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import Footer from "./components/index/Footer/Footer";
 import SignIn from "./components/index/form/SignIn";
 import SignUp from "./components/index/form/SignUp";
 import Index from "./components/index/index/Index";
@@ -16,7 +15,6 @@ import Search from "./components/app/search/Search";
 import PrivateProfile from "./components/app/profile/PrivateProfile";
 import PublicProfile from "./components/app/profile/PublicProfile";
 import Chat from "./components/app/messenger/Chat";
-import Users from "./components/app/users/Users";
 import Admin from "./components/app/admin/Admin";
 import AdminRoute from "./components/other/AdminRoute";
 import NormalRoute from "./components/other/NormalRoute";
@@ -59,9 +57,6 @@ export default function App() {
 
               <Route exact path={"/messenger"} element={<PrivateRoute><Chat/></PrivateRoute>}/>
               <Route exact path={"/messenger/:username"} element={<PrivateRoute><Chat/></PrivateRoute>}/>
-
-              <Route exact path={"/users"} element={<PrivateRoute><Users/></PrivateRoute>}/>
-              <Route exact path={":username/users"} element={<PrivateRoute><Users/></PrivateRoute>}/>
 
               <Route exact path={"/changepassword"} element={<PrivateRoute><Account/></PrivateRoute>}/>
 

@@ -8,8 +8,8 @@ export default function NewLevel() {
     const cookies = new Cookies();
 
     const [levelName, setLevelName] = useState("");
-    const [levelPicture, setLevelPicture] = useState(null);
-    const [levelMap, setLevelMap] = useState(null);
+    const [levelPicture, setMissionPicture] = useState(null);
+    const [levelMap, setMissionMap] = useState(null);
 
     const [openPopup, setOpenPopup] = useState(false);
 
@@ -21,8 +21,15 @@ export default function NewLevel() {
         setLevelName("");
     }
 
-    const addNewLevel = (event) => {
+    const clearError = () => {
+        const errorLabel = document.getElementById("error-label");
+        errorLabel.textContent = " ";
+    }
+
+    const addNewMission = (event) => {
         event.preventDefault();
+
+        const errorLabel = document.getElementById("error-label");
 
         axios({
             method: "post",
@@ -37,11 +44,11 @@ export default function NewLevel() {
         })
             .then(response => response.data)
             .then((data) => {
-                setMessage(data);
+                errorLabel.textContent = data;
                 setOpenPopup(true)
                 if (data === "Level successfully added") {
-                    setLevelPicture(null);
-                    setLevelMap(null)
+                    setMissionPicture(null);
+                    setMissionMap(null)
                     clearFileInput();
                 }
             }).catch(error => {
@@ -50,7 +57,42 @@ export default function NewLevel() {
     }
 
     return (
-        <>
+        <div>
+            <section id="hero" className="hero d-flex align-items-center text-center section-bg">
+                <div className="container" data-aos="fade-up">
+                    <div className="row justify-content-between gy-5">
+                        <div className="col-lg order-2 order-lg-2 text-center text-lg-start top0">
+                            <div className="container contact d-flex justify-content-center" data-aos="fade-up">
+                                <form className="php-email-form p-3 p-md-4 max-w" data-aos="fade-up"
+                                      data-aos-anchor-placement="top-bottom" onSubmit={addNewMission}>
+                                    <h3 id="error-label" className="text-center"></h3>
+                                    <div className="form-group">
+                                        <input id="addMission" type="text" className="form-control mt-1" name="addMission"
+                                               placeholder="Enter mission name"
+                                               value={levelName}
+                                               onChange={(event) => setLevelName(event.target.value)} onClick={clearError}/>
+                                    </div>
+                                    <div className="form-group">
+                                        <input id="missionPicture" accept=".jpg" type="file" className="form-control mt-1 account-select-image" onChange={(event) => {setMissionPicture(event)}} onClick={clearError}/>
+                                    </div>
+                                    <div className="form-group">
+                                    <input id="missionMap" accept=".tmx" type="file" className="form-control mt-1 account-select-image" onChange={(event) => {setMissionMap(event)}} onClick={clearError}/>
+                            </div>
+                                    <div className="text-center">
+                                        <button className="btn btn-primary" type="submit">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    );
+}
+
+/*
+<>
             <div className="admin-account-to-center">
                 <form className="form" onSubmit={addNewLevel}>
                     <div className="form-content">
@@ -87,5 +129,4 @@ export default function NewLevel() {
                 </div>
             </Popup>
         </>
-    );
-}
+ */

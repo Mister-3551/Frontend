@@ -5,7 +5,6 @@ import Cookies from "universal-cookie";
 import Popup from "../../other/Pupop";
 import {useEffect} from "react";
 import axios from "axios";
-
 import { IconContext } from "react-icons";
 import { BsBell, BsTrash } from "react-icons/bs";
 import { RxExit } from "react-icons/rx";
@@ -92,30 +91,30 @@ export default function AppNavigation() {
                                 {notifications.map((notification, id) =>
                                     <div key={id} id={"not-" + notification.idNotification} className="user-card card">
                                         <div className="user-container">
+                                            <img src={process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_PROFILE_PICTURE"] + notification.picture} alt="profile-picture"
+                                                 className="user-image"/>
                                             <div className="user-left">
-                                                <img src={process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_PROFILE_PICTURE"] + notification.picture} alt="profile-picture"
-                                                     className="navigation-image"/>
-                                            </div>
-                                            <div className="user-right">
                                                 <p className="navigation-text">User <Link
                                                     to={"../" + notification.username.toLowerCase()}
                                                     className="btn-link">{notification.username}</Link> started following you
                                                 </p>
                                                 <h5 className="navigation-text">{notification.createdAt}</h5>
                                             </div>
-                                            <div className="navigation-delete-notification" onClick={() => deleteNotifications(notification.id)}>
-                                                <IconContext.Provider
-                                                    value={{ color: "black", size: "38px" }}
-                                                >
-                                                    <BsTrash className="navigation-delete-notification" onClick={() => deleteNotifications(notification.id)}/>
-                                                </IconContext.Provider>
+                                            <div className="user-right">
+                                                <div className="navigation-delete-notification" onClick={() => deleteNotifications(notification.id)}>
+                                                    <IconContext.Provider
+                                                        value={{ color: "black", size: "38px" }}
+                                                    >
+                                                        <BsTrash className="navigation-delete-notification" onClick={() => deleteNotifications(notification.id)}/>
+                                                    </IconContext.Provider>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 )
                                 }
                             </div> :
-                            <div className="navigation-card card text-center">
+                            <div className="user-card card text-center">
                                 No notifications
                             </div>
 
@@ -154,32 +153,11 @@ export default function AppNavigation() {
                                 {notifications.length !== 0 ?
                                     <div>
                                         {
-                                                /* <div key={id} id={"not-" + notification.idNotification} className="navigation-card card">
-                                                    <div className="navigation-container">
-                                                        <div className="navigation-left">
-                                                            <img src={process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_PROFILE_PICTURE"] + notification.picture} alt="profile-picture"
-                                                                 className="navigation-image"/>
-                                                        </div>
-                                                        <div className="navigation-right">
-                                                            <p className="navigation-text">User <Link
-                                                                to={"../" + notification.username.toLowerCase()}
-                                                                className="btn-link">{notification.username}</Link> started following you
-                                                            </p>
-                                                            <h5 className="navigation-text">{notification.createdAt}</h5>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                                <div className="navigation-card card text-center">
-                                            No notifications
-                                        </div>
-                                        */
                                             notifications.map((user, id) =>
-                                                <div className={`user-card card`}>
+                                                <div key={id} className={`user-card card`}>
                                                     <div className="user-container">
                                                         <img src={process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_PROFILE_PICTURE"] + user.picture} alt="profile-picture"
-                                                             className="navigation-image"/>
+                                                             className="user-image"/>
                                                         <div className="user-left">
                                                             <p className="navigation-text">User <Link
                                                                 to={"../" + user.username.toLowerCase()}
@@ -204,7 +182,10 @@ export default function AppNavigation() {
 
 
                                 }
-                                    </div> : null
+                                    </div> :
+                                    <div className="user-card card text-center">
+                                        No notifications
+                                    </div>
                                 }
                             </NavDropdown>
                         </Nav>

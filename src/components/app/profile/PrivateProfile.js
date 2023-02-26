@@ -7,11 +7,11 @@ import LeaderBoard from "./leaderboard/LeaderBoard";
 
 export default function PrivateProfile() {
     return (
-        <Tabs id="fill-tab-example" defaultActiveKey="statistics" className="mb-3" fill>
-            <Tab eventKey="statistics" title="Statistics">
+        <Tabs id="fill-tab-example" defaultActiveKey="profile" className="mb-3" fill>
+            <Tab eventKey="profile" title="Profile">
                 <Statistics/>
             </Tab>
-            <Tab eventKey="levelStatistics" title="Level Statistics">
+            <Tab eventKey="statistics" title="Statistics">
                 <Missions/>
             </Tab>
             <Tab eventKey="leaderBoard" title="Leader Board">

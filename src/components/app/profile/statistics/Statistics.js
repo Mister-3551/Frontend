@@ -1,22 +1,19 @@
 import React, {useEffect} from "react";
-import {Col, Container, ProgressBar, Row} from "react-bootstrap";
-import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import "./Statistics.css";
 import axios from "axios";
 import Cookies from 'universal-cookie';
 import {useState} from "react";
 import {Link, useLocation, useParams} from "react-router-dom";
 import {useUpdate} from "../../../other/GlobalVariables";
+import {Button, Col, Modal, ProgressBar} from "react-bootstrap";
 
 export default function Statistics() {
 
     const cookies = new Cookies();
     const [userData, setUserData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [followersOrFollowing, setFollowersOrFollowing] = useState([]);
 
-    const [following, setFollowing] = useState(0);
-    const [followers, setFollowers] = useState(0);
+    const [loading, setLoading] = useState(true);
 
     const [buttonText, setButtonText] = useState("");
 
@@ -29,12 +26,18 @@ export default function Statistics() {
 
     const {update} = useUpdate();
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+
+    const [typeName, setTypeName] = useState([]);
+
     useEffect(() => {
 
         axios({
             method: "post",
             url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_PLAYER_STATISTICS"],
-            params: {idUserOrUsername : idUserOrUsername}
+            params: {idUserOrUsername: idUserOrUsername}
         })
             .then(response => response.data)
             .then((data) => {
@@ -42,19 +45,6 @@ export default function Statistics() {
                 const image = update === false ? process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_PROFILE_PICTURE"] + data.picture : process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_PROFILE_PICTURE_UPDATE"] + data.picture;
                 setImage(image);
                 setLoading(false);
-            }).catch(error => {
-            console.log(error);
-        })
-
-        axios({
-            method: "post",
-            url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_FOLLOWING_FOLLOWERS_COUNT"],
-            params: {idUserOrUsername : idUserOrUsername}
-        })
-            .then(response => response.data)
-            .then((data) => {
-                setFollowing(data.following);
-                setFollowers(data.followers);
             }).catch(error => {
             console.log(error);
         })
@@ -71,6 +61,7 @@ export default function Statistics() {
                 console.log(error);
             })
         }
+
     }, [update, location]);
 
     const updateStatus = (type) => {
@@ -86,8 +77,131 @@ export default function Statistics() {
             console.log(error);
         })
     }
+
+    const openUsers = (type) => {
+
+        const lastPart = type.match("Followers") ? process.env["REACT_APP_FOLLOWERS"] : process.env["REACT_APP_FOLLOWING"];
+        const url = process.env["REACT_APP_BACKEND_URL_API"] + lastPart;
+
+        axios({
+            method: "post",
+            url: url,
+            params: {idUserOrUsername : idUserOrUsername}
+        })
+            .then(response => response.data)
+            .then((data) => {
+                setFollowersOrFollowing(data);
+            }).catch(error => {
+                console.log(error);
+            })
+
+        setTypeName(type);
+        setShow(true);
+    }
+
         return (
             <div>
+                {
+                    !loading && userData.username !== undefined ?
+                        <section id="profile" className="section-bg">
+                            <div className="container profile aos-init aos-animate" data-aos="fade-up">
+                                <div className="card">
+                                    <header className="card-header">
+                                        <div className="hello">
+                                            <img src={image} alt="profile picture"/>
+                                            <div className="heading-box">
+                                                <h1>{userData.username}</h1>
+                                                <h3><i className="material-icons">Rank {userData.rank}</i></h3>
+                                            </div>
+                                        </div>
+                                        <div className="button-box">
+                                            {username !== undefined ?
+                                                <div id="ch-btn" className="text-end statistics-button">
+                                                    {buttonText.match("Following") ?
+                                                        <button id="btn-wt" onClick={() => {updateStatus("Following");}}>{buttonText}</button> :
+                                                        <button id="btn-wt" onClick={() => {updateStatus("Follow")}}>{buttonText}</button>
+                                                    }
+                                                </div> : <div></div>
+                                            }
+                                        </div>
+                                    </header>
+
+                                    <div className="main">
+                                        <main className="card-main">
+                                            <div className="activity">
+                                                <span className="activity-name">{userData.currentXp} / {userData.nextLevelXp} XP</span>
+                                            </div>
+                                            <div className="activity" onClick={event => openUsers("Followers")}>
+                                                <span className="activity-name">{userData.followers} Followers</span>
+                                            </div>
+                                            <div className="activity" onClick={event => openUsers("Following")}>
+                                                <span className="activity-name">{userData.following} Following</span>
+                                            </div>
+                                        </main>
+
+                                        <main className="card-main">
+                                            <div className="activity">
+                                                <span className="activity-name">
+                                                    {userData.ratio}% Completed
+                                                </span>
+                                            </div>
+
+                                            <div className="activity">
+                                                <span className="activity-name">{userData.hours}h {userData.minutes}m Played</span>
+                                            </div>
+                                        </main>
+                                    </div>
+                                </div>
+                            </div>
+                        </section> : null
+                }
+
+
+                <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+                    <Modal.Header>
+                        <Modal.Title>{typeName}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
+                        <section id="hero" className="d-flex align-items-start section-bg">
+                            <div className="container mission-panel" data-aos="fade-up">
+                                <div className="row justify-content-between gy-5">
+                                    <div className="col-lg-12 justify-content-center order-2 order-lg-1 d-flex flex-column justify-content-center align-items-lg-start text-lg-start">
+                                        {
+                                            followersOrFollowing.map((user, id) =>
+                                                <Col key={id} xs={12} md={12} lg={12}>
+                                                    <div className={`user-card card`}>
+                                                        <div className="user-container">
+                                                            <img src={update === false ? process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_PROFILE_PICTURE"] + user.picture : process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_PROFILE_PICTURE_UPDATE"] + user.picture}
+                                                                 className="user-image" alt="profile-picture"/>
+                                                            <div className="user-left">
+                                                                <h5 className="user-name">{id + 1}. {user.username}</h5>
+                                                                <p className="user-rank">Rank: {user.rank}</p>
+                                                            </div>
+                                                            <div className="user-right">
+                                                                <span><Link to={"../" + user.username.toLowerCase()} className="btn-link">View</Link></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </Col>
+                                            )}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+        );
+
+
+
+    /*
+    <div>
                 {!loading && userData.username !== undefined ?
                     <Container className="statistics-form">
                         {username !== undefined ?
@@ -180,5 +294,5 @@ export default function Statistics() {
                     </div>
                 }
             </div>
-        );
+     */
 }

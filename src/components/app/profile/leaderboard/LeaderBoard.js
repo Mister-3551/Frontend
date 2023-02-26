@@ -34,7 +34,6 @@ export default function LeaderBoard() {
         <div>
             <section id="github" className="chefs section-bg">
                 <div className="container aos-init aos-animate" data-aos="fade-up">
-
                     <Row>
                         {
                             leaderBoard.map((user, id) =>
