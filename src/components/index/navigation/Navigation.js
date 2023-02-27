@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
 import Popup from "../../other/Pupop";
-import "./Navigation.css";
 
 export default function Navigation() {
 

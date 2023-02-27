@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import Cookies from "universal-cookie";
-import "./index.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
