@@ -4,11 +4,13 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {allowedCharacters, allowedCharactersForPassword} from "../../../other/Regex";
+
 
 export default function Account() {
 
     const cookies = new Cookies();
+
+    const [error, setError] = useState("");
 
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -18,39 +20,35 @@ export default function Account() {
         AOS.init({});
     }, [])
 
-    const clearFileInput = () => {
+    const clearInputs = () => {
         setCurrentPassword("");
         setNewPassword("");
         setConfirmPassword("");
     }
 
     const clearError = () => {
-        const errorLabel = document.getElementById("error-label");
-        errorLabel.textContent = " ";
+        setError("");
     }
 
     const updatePassword = (event) => {
         event.preventDefault();
 
-        const errorLabel = document.getElementById("error-label");
-
         axios({
             method: "post",
             url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_CHANGE_PASSWORD"],
-            data : {
+            params : {
                 idAdmin: cookies.get("idUser"),
                 currentPassword: currentPassword,
                 newPassword: newPassword,
                 confirmPassword:  confirmPassword
-            },
-            headers: { "Content-Type": "multipart/form-data" }
+            }
         })
             .then(response => response.data)
             .then((data) => {
-                errorLabel.textContent = data;
                 if (data === "Password successfully updated") {
-                    clearFileInput();
-                }
+                    setError(data);
+                    clearInputs();
+                } else setError(data)
             }).catch(error => {
             console.log(error);
         })
@@ -65,7 +63,7 @@ export default function Account() {
                             <div className="container contact d-flex justify-content-center" data-aos="fade-up">
                                 <form className="php-email-form p-3 p-md-4 max-w" data-aos="fade-up"
                                       data-aos-anchor-placement="top-bottom" onSubmit={updatePassword}>
-                                    <h3 id="error-label" className="text-center"></h3>
+                                    <h3 id="error-label" className="text-center">{error}</h3>
                                     <div className="form-group">
                                         <input id="passoword" type="password" className="form-control mt-1" name="password"
                                                placeholder="Enter current password"

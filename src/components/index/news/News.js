@@ -51,10 +51,10 @@ export default function News() {
                 </div>
             </section>
 
-            <section id="download" className="why-us section-bg">
+            {/*<section id="news" className="why-us section-bg">
                 <div className="container" data-aos="fade-up">
 
-                    <div className="row gy-4">
+                    <div className="row gy-4 news-part">
                         {
                             news.map((news, id) =>
                                 <div key={id} className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
@@ -67,7 +67,30 @@ export default function News() {
                         }
                     </div>
                 </div>
+            </section>*/}
+
+
+            <section className="content-wrapper section-bg">
+                {
+                    news.map((news, id) =>
+                        <div key={id} className="news-card">
+                            <a href="#" className="news-card__card-link"></a>
+                            <img
+                                src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+                                alt="" className="news-card__image"/>
+                                <div className="news-card__text-wrapper">
+                                    <h2 className="news-card__title">{news.title}</h2>
+                                    <div className="news-card__post-date">{news.createdAt}</div>
+                                    <div className="news-card__details-wrapper">
+                                        <p className="news-card__excerpt">{news.text} &hellip;</p>
+                                        <a href="#" className="news-card__read-more">Read more</a>
+                                    </div>
+                                </div>
+                        </div>
+                    )
+                }
             </section>
+
 
             <footer id="footer" className="footer container-fluid">
 

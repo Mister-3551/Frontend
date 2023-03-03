@@ -14,6 +14,7 @@ export default function SignUp() {
     const checkCookie = cookies.get("idUser");
     const navigate = useNavigate();
 
+    const [error, setError] = useState("");
     const [fullName, setFullName] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -29,59 +30,69 @@ export default function SignUp() {
         window.scrollTo(0, 0);
     }, []);
 
+    const clearInputs = () => {
+        setFullName("");
+        setUsername("");
+        setEmail("");
+        setPassword("");
+    }
+
+    const clearError = () => {
+        setError("");
+    }
+
     const signUp = (event) => {
         event.preventDefault();
-        const errorLabel = document.getElementById("error-label");
 
         if (fullName.trim().length === 0 || username.trim().length === 0 || email.trim().length === 0 || password.trim().length === 0) {
-            errorLabel.textContent = "Fields can not be empty";
+            setError("Fields can not be empty");
             return;
         }
 
         if (!allowedCharacters.test(fullName)) {
-            errorLabel.textContent = "Illegal characters in full name";
+            setError("Illegal characters in full name");
             return;
         }
 
         if (!allowedCharacters.test(username)) {
-            errorLabel.textContent = "Illegal characters in username";
+            setError("Illegal characters in username");
             return;
         }
 
         if (!emailRegex.test(email)) {
-            errorLabel.textContent = "Email address is not valid";
+            setError("Email address is not valid");
             return;
         }
 
         if (password.length < 8 || password.length > 16) {
-            errorLabel.textContent = "Password length must be between 8 and 16 characters";
+            setError("Password length must be between 8 and 16 characters");
             return;
         }
 
         if (!allowedCharacters.test(password)) {
-            errorLabel.textContent = "Illegal characters in password";
+            setError("Illegal characters in password");
             return;
         }
 
-        axios.post("http://localhost:8080/signup/fullname/" + fullName + "/username/" + username + "/email/" + email + "/password/" + password)
+        axios({
+            method: "post",
+            url: "" /*TODO make sign up api*/,
+            params : {
+                fullName: fullName,
+                username: username,
+                email:  email,
+                password:  password
+            }
+        })
             .then(response => response.data)
             .then((data) => {
-                if (data === "username") {
-                    errorLabel.textContent = "Username already exists";
-                }
-                if (data === "email") {
-                    errorLabel.textContent = "Email already exists";
-                }
-                if (data === "successfully") {
-                    errorLabel.textContent = "Successfully";
-                }
-            });
+                if (data === "Password successfully updated") {
+                    clearInputs();
+                } else setError(data)
+            }).catch(error => {
+            console.log(error);
+        })
     };
-
-    const clearError = () => {
-        const errorLabel = document.getElementById("error-label");
-        errorLabel.textContent = " ";
-    }
 
     return (
         <div>
@@ -96,7 +107,7 @@ export default function SignUp() {
                             <div className="container contact" data-aos="fade-up">
                                 <form method="post" role="form" className="php-email-form p-3 p-md-4" data-aos="fade-up"
                                       data-aos-anchor-placement="top-bottom" onSubmit={signUp}>
-                                    <h3 id="error-label" className="text-center"></h3>
+                                    <h3 id="error-label" className="text-center">{error}</h3>
                                     <div className="form-group">
                                         <input type="text" className="form-control mt-1" name="fullName"
                                                placeholder="Enter your full name"

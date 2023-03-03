@@ -9,9 +9,11 @@ export default function Account() {
 
     const cookies = new Cookies();
 
+    const [error, setError] = useState("");
     const [fullName, setFullName] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const [profilePictureText, setProfilePictureText] = useState("Select Profile Picture");
     const [profilePicture, setProfilePicture] = useState(null);
 
     const {update, setUpdate} = useUpdate();
@@ -32,32 +34,32 @@ export default function Account() {
             })
     }, []);
 
-    const setProfileImageForUpdate = (file) => {
-        //console.log(profilePicture)
-        //setProfileImage(URL.createObjectURL(profilePicture));
+    const clearInputs = () => {
+        setProfilePicture(null);
+        setProfilePictureText("Select Profile Picture");
     }
 
-    const clearFileInput = () => {
-        document.getElementById("imageFile").value = "";
+    const setPicture = (file) => {
+        setProfilePicture(file);
+        if (file.target.files[0] !== undefined) setProfilePictureText(file.target.files[0].name);
+        else setProfilePictureText("Select Profile Picture");
     }
 
     const updateAccountData = (event) => {
         event.preventDefault();
 
-        const errorLabel = document.getElementById("error-label");
-
         if (fullName.trim().length === 0 || username.trim().length === 0 || email.trim().length === 0) {
-            errorLabel.textContent = "Fields can not be empty";
+            setError("Fields can not be empty");
             return;
         }
 
         if (!allowedCharacters.test(fullName)) {
-            errorLabel.textContent = "Illegal characters in full name";
+            setError("Illegal characters in full name");
             return;
         }
 
         if (!allowedCharacters.test(username)) {
-            errorLabel.textContent = "Illegal characters in username";
+            setError("Illegal characters in username");
             return;
         }
 
@@ -73,18 +75,18 @@ export default function Account() {
         })
             .then(response => response.data)
             .then((data) => {
-                if (data === "The account has been updated") setUpdate(!update);
-                errorLabel.textContent = data;
-                setProfilePicture(null);
-                clearFileInput();
+                if (data === "The account has been updated") {
+                    setUpdate(!update);
+                }
+                setError(data);
+                clearInputs();
             }).catch(error => {
             console.log(error);
         })
     }
 
     const clearError = () => {
-        const errorLabel = document.getElementById("error-label");
-        errorLabel.textContent = " ";
+        setError("");
     }
 
     return (
@@ -96,9 +98,10 @@ export default function Account() {
                                 <div className="container contact d-flex justify-content-center" data-aos="fade-up">
                                     <form className="php-email-form p-3 p-md-4 max-w" data-aos="fade-up"
                                           data-aos-anchor-placement="top-bottom" onSubmit={updateAccountData}>
-                                        <h3 id="error-label" className="text-center"></h3>
+                                        <h3 id="error-label" className="text-center">{error}</h3>
                                         <div className="form-group">
-                                            <input id="imageFile" accept=".jpg" type="file" className="form-control mt-1" onChange={(event) => {setProfilePicture(event)}} onClick={clearError}/>
+                                            <label htmlFor="profilePicture" className="form-control mt-1 text-start">{profilePictureText}</label>
+                                            <input id="profilePicture" accept=".jpg" type="file" className="form-control mt-1" onChange={(event) => {setPicture(event)}} onClick={clearError} hidden={true}/>
                                         </div>
                                         <div className="form-group">
                                             <input type="text" className="form-control mt-1" name="fullName"

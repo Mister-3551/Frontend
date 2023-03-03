@@ -10,6 +10,7 @@ import {useEffect} from "react";
 
 export default function SignIn () {
 
+    const [error, setError] = useState("");
     const [emailUsername, setEmailUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -28,25 +29,18 @@ export default function SignIn () {
         window.scrollTo(0, 0);
     }, []);
 
+    const clearError = () => {
+        setError("");
+    }
+
     const signIn = (event) => {
         event.preventDefault();
 
-        const errorLabel = document.getElementById("error-label");
-
         if (emailUsername.trim().length === 0 || password.trim().length === 0) {
-            errorLabel.textContent = "Fields can not be empty";
+            setError("Fields can not be empty");
             return;
         }
 
-        uploadData(errorLabel);
-    };
-
-    const clearError = () => {
-        const errorLabel = document.getElementById("error-label");
-        errorLabel.textContent = " ";
-    }
-
-    const uploadData = (errorLabel) => {
         axios({
             method: "post",
             url: process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_SIGN_IN"],
@@ -65,7 +59,7 @@ export default function SignIn () {
                         navigate("/admin")
                     }
                 } else {
-                    errorLabel.textContent = "Wrong username or password";
+                    setError("Wrong username or password");
                 }
             })
     }
@@ -83,7 +77,7 @@ export default function SignIn () {
                             <div className="container contact" data-aos="fade-up">
                                 <form method="post" role="form" className="php-email-form p-3 p-md-4" data-aos="fade-up"
                                       data-aos-anchor-placement="top-bottom" onSubmit={signIn}>
-                                    <h3 id="error-label" className="text-center"></h3>
+                                    <h3 id="error-label" className="text-center">{error}</h3>
                                     <div className="form-group">
                                         <input type="text" className="form-control mt-1" name="emailUsername"
                                                placeholder="Enter email or username"

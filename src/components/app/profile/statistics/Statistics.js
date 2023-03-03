@@ -6,6 +6,7 @@ import {useState} from "react";
 import {Link, useLocation, useParams} from "react-router-dom";
 import {useUpdate} from "../../../other/GlobalVariables";
 import {Button, Col, Modal, ProgressBar} from "react-bootstrap";
+import {parseCSS} from "@testing-library/jest-dom/dist/utils";
 
 export default function Statistics() {
 
@@ -118,8 +119,8 @@ export default function Statistics() {
                                             {username !== undefined ?
                                                 <div id="ch-btn" className="text-end statistics-button">
                                                     {buttonText.match("Following") ?
-                                                        <button id="btn-wt" onClick={() => {updateStatus("Following");}}>{buttonText}</button> :
-                                                        <button id="btn-wt" onClick={() => {updateStatus("Follow")}}>{buttonText}</button>
+                                                        <button id="btn-wt" className="btn btn-primary" onClick={() => {updateStatus("Following");}}>{buttonText}</button> :
+                                                        <button id="btn-wt" className="btn btn-primary" onClick={() => {updateStatus("Follow")}}>{buttonText}</button>
                                                     }
                                                 </div> : <div></div>
                                             }
@@ -142,7 +143,7 @@ export default function Statistics() {
                                         <main className="card-main">
                                             <div className="activity">
                                                 <span className="activity-name">
-                                                    {userData.ratio}% Completed
+                                                    {parseFloat(userData.completed)}% Completed
                                                 </span>
                                             </div>
 
