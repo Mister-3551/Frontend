@@ -83,6 +83,7 @@ export default function NewSkin() {
                                             <option value="cursor">Cursor</option>
                                             <option value="aim">Aim</option>
                                             <option value="bullet">Bullet</option>
+                                            <option value="weapon">Weapon</option>
                                         </select>
                                     </div>
                                     <div className="form-group">

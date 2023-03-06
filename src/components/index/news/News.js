@@ -13,6 +13,7 @@ export default function News() {
     const checkCookie = cookies.get("sessionToken");
 
     const [news, setNews] = useState([]);
+    const [image, setImage] = useState(null);
 
     useEffect(() => {
             if (checkCookie) {
@@ -75,9 +76,8 @@ export default function News() {
                     news.map((news, id) =>
                         <div key={id} className="news-card">
                             <a href="#" className="news-card__card-link"></a>
-                            <img
-                                src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-                                alt="" className="news-card__image"/>
+                            <img src={process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_NEWS_PICTURE"] + news.picture} alt="profile picture"
+                                alt={"news" + id} className="news-card__image"/>
                                 <div className="news-card__text-wrapper">
                                     <h2 className="news-card__title">{news.title}</h2>
                                     <div className="news-card__post-date">{news.createdAt}</div>
@@ -145,10 +145,7 @@ export default function News() {
 
                 <div className="container">
                     <div className="copyright">
-                        &copy; Copyright <strong><span>Yummy</span></strong>. All Rights Reserved
-                    </div>
-                    <div className="credits">
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        &copy; Copyright <strong><span>Game</span></strong>. All Rights Reserved
                     </div>
                 </div>
             </footer>

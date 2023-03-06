@@ -5,8 +5,7 @@ import Cookies from 'universal-cookie';
 import {useState} from "react";
 import {Link, useLocation, useParams} from "react-router-dom";
 import {useUpdate} from "../../../other/GlobalVariables";
-import {Button, Col, Modal, ProgressBar} from "react-bootstrap";
-import {parseCSS} from "@testing-library/jest-dom/dist/utils";
+import {Button, Col, Modal} from "react-bootstrap";
 
 export default function Statistics() {
 

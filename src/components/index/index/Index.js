@@ -372,10 +372,7 @@ export default function Index() {
 
                 <div className="container">
                     <div className="copyright">
-                        &copy; Copyright <strong><span>Yummy</span></strong>. All Rights Reserved
-                    </div>
-                    <div className="credits">
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        &copy; Copyright <strong><span>Game</span></strong>. All Rights Reserved
                     </div>
                 </div>
             </footer>

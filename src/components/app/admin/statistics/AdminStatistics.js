@@ -5,7 +5,8 @@ import Cookies from "universal-cookie";
 import {Button, Modal} from "react-bootstrap";
 import NewMission from "../modal/NewMission";
 import NewTile from "../modal/NewTile";
-import NewSkin from "../modal/New Skin";
+import NewSkin from "../modal/NewSkin";
+import NewNews from "../modal/NewNews";
 
 export default function AdminStatistics() {
 
@@ -41,6 +42,7 @@ export default function AdminStatistics() {
         if (type.match("New Mission")) setContent(<NewMission/>);
         else if (type.match("New Tile")) setContent(<NewTile/>);
         else if (type.match("New Skin")) setContent(<NewSkin/>);
+        else if (type.match("New News")) setContent(<NewNews/>);
         else setContent(null);
 
         setShow(true);
@@ -83,7 +85,7 @@ export default function AdminStatistics() {
                                 <div className="activity" onClick={() => openModal("New Skin")}>
                                     <span className="activity-name">Add skin</span>
                                 </div>
-                                <div className="activity" onClick={() => openModal("News")}>
+                                <div className="activity" onClick={() => openModal("New News")}>
                                     <span className="activity-name">News</span>
                                 </div>
                         </main>

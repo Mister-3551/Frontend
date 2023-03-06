@@ -80,7 +80,7 @@ export default function Missions() {
                                  data-aos-delay="100">
                                 <div className="chef-member col-12">
                                     <div className="member-img w-100">
-                                        <img src={process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_LEVEL_PICTURE"] + mission.picture}
+                                        <img src={process.env["REACT_APP_BACKEND_URL_API"] + process.env["REACT_APP_MISSION_PICTURE"] + mission.picture}
                                             className="img-fluid download-image w-100" alt={mission.name} />
                                     </div>
                                     <div className="member-info w-100 h-25">
